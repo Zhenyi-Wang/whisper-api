@@ -2,6 +2,8 @@
 
 这是一个基于 Faster-Whisper 的语音识别服务，提供简单的 REST API 接口进行音频转写。
 
+最初是为 [Visual Split Mark](https://github.com/Zhenyi-Wang/visual-split-mark) 项目开发的语音识别服务，默认配置的 API 地址为 http://localhost:8000/transcribe。当然也可以作为独立的通用语音识别服务使用。
+
 ## 功能特点
 
 - 基于 Faster-Whisper 的高效语音识别
