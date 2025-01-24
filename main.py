@@ -13,6 +13,7 @@ from datetime import datetime
 import time
 from pydub import AudioSegment
 from pydub.utils import mediainfo
+import opencc
 
 # 配置日志
 logging.basicConfig(
@@ -24,6 +25,9 @@ logger = logging.getLogger(__name__)
 
 # 加载配置
 Config.load_from_env()
+
+# 初始化繁简转换器
+converter = opencc.OpenCC('t2s')
 
 # API 模型
 class TranscriptionResult(BaseModel):
@@ -87,11 +91,13 @@ async def transcribe_audio(file: UploadFile):
             model = WhisperManager.get_model()
             segments, _ = model.transcribe(temp_path)
             
+            # 处理文本（包括繁简转换）
+            logger.info(f"文本处理 - 繁简转换: {'启用' if Config.CONVERT_TO_SIMPLIFIED else '禁用'}")
             result = TranscriptionResult(segments=[
                 {
                     "start": segment.start,
                     "end": segment.end,
-                    "text": segment.text.strip()
+                    "text": converter.convert(segment.text.strip()) if Config.CONVERT_TO_SIMPLIFIED else segment.text.strip()
                 }
                 for segment in segments
             ])

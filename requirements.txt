@@ -4,3 +4,4 @@ faster-whisper
 python-multipart  # 用于处理文件上传
 python-dotenv  # 用于加载 .env 文件
 pydub 
+opencc-python-reimplemented  # 用于繁简转换 

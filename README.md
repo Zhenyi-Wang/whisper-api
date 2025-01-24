@@ -12,6 +12,7 @@
 - 支持 GPU 加速
 - 灵活的配置选项
 - 详细的处理日志
+- 支持繁体中文自动转换为简体中文
 
 ## 快速开始
 
@@ -137,6 +138,12 @@ WHISPER_COMPUTE_TYPE=float16  # 或 float32
   - 默认值: 自动选择
   - 可选值: "float16", "float32"
   - 说明: GPU 模式下建议使用 "float16"，CPU 模式使用 "float32"
+
+#### 文本处理配置
+- `WHISPER_CONVERT_TO_SIMPLIFIED`: 繁简转换
+  - 默认值: true
+  - 可选值: true, false
+  - 说明: 是否将识别出的繁体中文自动转换为简体中文
 
 ### 使用环境变量
 

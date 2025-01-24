@@ -17,6 +17,9 @@ class Config:
     DEVICE: str = "cuda" if torch.cuda.is_available() else "cpu"
     COMPUTE_TYPE: str = "float16" if torch.cuda.is_available() else "float32"
     
+    # 繁简转换配置
+    CONVERT_TO_SIMPLIFIED: bool = True  # 是否将繁体转换为简体
+    
     # 从环境变量加载配置
     @classmethod
     def load_from_env(cls):
@@ -25,4 +28,5 @@ class Config:
         cls.MODEL_SIZE = os.getenv("WHISPER_MODEL_SIZE", cls.MODEL_SIZE)
         cls.MODEL_PATH = os.getenv("WHISPER_MODEL_PATH", cls.MODEL_PATH)
         cls.DEVICE = os.getenv("WHISPER_DEVICE", cls.DEVICE)
-        cls.COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", cls.COMPUTE_TYPE) 
+        cls.COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", cls.COMPUTE_TYPE)
+        cls.CONVERT_TO_SIMPLIFIED = os.getenv("WHISPER_CONVERT_TO_SIMPLIFIED", "true").lower() == "true" 
